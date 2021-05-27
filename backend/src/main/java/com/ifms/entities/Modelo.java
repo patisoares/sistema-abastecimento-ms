@@ -1,7 +1,6 @@
 package com.ifms.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tb_modelo")
 public class Modelo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -20,11 +20,9 @@ public class Modelo implements Serializable {
 	private Long id;
 	private String descricao;
 	
-	@OneToMany(mappedBy = "modelo")
-	private List<Veiculo> veiculos;
-	
+		
 	@ManyToOne
-	@JoinColumn(name = "id_marca-fk")
+	@JoinColumn(name = "id_marca_fk")
 	private Marca marca;
 
 	
@@ -55,10 +53,6 @@ public class Modelo implements Serializable {
 		this.descricao = descricao;
 	}
 
-
-	public List<Veiculo> getVeiculos() {
-		return veiculos;
-	}
 
 	public Marca getMarca() {
 		return marca;

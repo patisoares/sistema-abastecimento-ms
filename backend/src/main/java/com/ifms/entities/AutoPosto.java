@@ -1,7 +1,6 @@
 package com.ifms.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,27 +9,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_autoPosto")
+@Table(name = "tb_autoposto")
 public class AutoPosto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(name ="nome_fantasia")
 	private String nomeFantasia;
+	
 	private String telefone;
 	private String email;
-	private String cnpj;
+	
+	@Column(name ="cnpj")
+	private String CNPJ;	
 	private String endereco;
 	
-	@OneToMany(mappedBy = "autoposto")
-	private List<Abastecimento> abastecimentos;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "id_cidade_fk")
 	private Cidade cidade;
@@ -39,17 +39,16 @@ public class AutoPosto implements Serializable{
 		
 	}
 	
-	public AutoPosto(Long id, String nomeFantasia, String telefone, String email, String cnpj, String endereco,
+		public AutoPosto(Long id, String nomeFantasia, String telefone, String email, String cNPJ, String endereco,
 			Cidade cidade) {
 		this.id = id;
 		this.nomeFantasia = nomeFantasia;
 		this.telefone = telefone;
 		this.email = email;
-		this.cnpj = cnpj;
+		this.CNPJ = cNPJ;
 		this.endereco = endereco;
 		this.cidade = cidade;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -82,15 +81,15 @@ public class AutoPosto implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public String getCnpj() {
-		return cnpj;
+		
+	public String getCNPJ() {
+		return CNPJ;
 	}
-	
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+
+	public void setCNPJ(String cNPJ) {
+		this.CNPJ = cNPJ;
 	}
-	
+
 	public String getEndereco() {
 		return endereco;
 	}
@@ -99,10 +98,6 @@ public class AutoPosto implements Serializable{
 		this.endereco = endereco;
 	}
 	
-	public List<Abastecimento> getAbastecimentos() {
-		return abastecimentos;
-	}
-
 	public Cidade getCidade() {
 		return cidade;
 	}

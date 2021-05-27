@@ -54,10 +54,6 @@ public class Lotacao implements Serializable {
 		this.cidade = cidade;
 	}
 
-
-
-
-
 	public Long getId() {
 		return id;
 	}

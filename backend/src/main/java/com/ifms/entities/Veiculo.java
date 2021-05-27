@@ -1,7 +1,6 @@
 package com.ifms.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tb_veiculo")
 public class Veiculo implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -29,29 +29,23 @@ public class Veiculo implements Serializable{
 	private String versao;
 	
 	@Column(name = "capacidade_tanque")
-	private String capacidadeTanque;
+	private Integer capacidadeTanque;
 	
 	@Column(name = "tipo_combustivel")
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	private Combustivel tipoCombustivel;
-	
-	@OneToMany(mappedBy = "veiculo")
-	private List<Abastecimento> abastecimentos;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_fk")
 	private Tipo tipo;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_modelo_fk")
-	private Modelo modelo;
 	
 	public Veiculo() {
 		
 	}
 	
 	public Veiculo(Long id, Integer ano, String placa, String renavan, String patrimonio, String chassi, String versao,
-		String capacidadeTanque, Combustivel tipoCombustivel, Tipo tipo, Modelo modelo) {
+		Integer capacidadeTanque, Combustivel tipoCombustivel, Tipo tipo) {
 		this.id = id;
 		this.ano = ano;
 		this.placa = placa;
@@ -62,7 +56,7 @@ public class Veiculo implements Serializable{
 		this.capacidadeTanque = capacidadeTanque;
 		this.tipoCombustivel = tipoCombustivel;
 		this.tipo = tipo;
-		this.modelo = modelo;
+		
 	}
 
 
@@ -122,11 +116,11 @@ public class Veiculo implements Serializable{
 		this.versao = versao;
 	}
 
-	public String getCapacidadeTanque() {
+	public Integer getCapacidadeTanque() {
 		return capacidadeTanque;
 	}
 
-	public void setCapacidadeTanque(String capacidadeTanque) {
+	public void setCapacidadeTanque(Integer capacidadeTanque) {
 		this.capacidadeTanque = capacidadeTanque;
 	}
 
@@ -138,10 +132,6 @@ public class Veiculo implements Serializable{
 		this.tipoCombustivel = tipoCombustivel;
 	}
 
-	public List<Abastecimento> getAbastecimentos() {
-		return abastecimentos;
-	}
-
 	public Tipo getTipo() {
 		return tipo;
 	}
@@ -149,15 +139,7 @@ public class Veiculo implements Serializable{
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
-
-	public Modelo getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(Modelo modelo) {
-		this.modelo = modelo;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

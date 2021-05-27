@@ -1,13 +1,11 @@
 package com.ifms.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,17 +18,17 @@ public class Estado implements Serializable {
 	private Long id;
 	private String UF;
 	
-	@OneToMany(mappedBy = "estado")
-	private List<Estado> estados;
 	
-
 	public Estado() {
 	}
 
-	public Estado(Long id, String uF) {
+	
+	public Estado(Long id, String UF) {
 		this.id = id;
-		UF = uF;
+		this.UF = UF;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -45,15 +43,9 @@ public class Estado implements Serializable {
 	}
 
 	public void setUF(String uF) {
-		UF = uF;
+		this.UF = uF;
 	}
 	
-	public List<Estado> getEstados() {
-		return estados;
-	}
-
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
