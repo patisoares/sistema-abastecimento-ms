@@ -1,25 +1,14 @@
-package com.ifms.entities;
+package com.ifms.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.ifms.entities.Combustivel;
+import com.ifms.entities.Tipo;
+import com.ifms.entities.Veiculo;
 
-@Entity
-@Table(name = "tb_veiculo")
-public class Veiculo implements Serializable{
+public class VeiculoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Long id;
 	private Integer ano;
 	private String placa;
@@ -27,28 +16,16 @@ public class Veiculo implements Serializable{
 	private String patrimonio;
 	private String chassi;
 	private String versao;
-	
-	@Column(name = "capacidade_tanque")
 	private Integer capacidadeTanque;
-	
-	@Column(name = "tipo_combustivel")
-	@Enumerated(EnumType.STRING)
 	private Combustivel tipoCombustivel;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_tipo_fk")
 	private Tipo tipo;
 	
-	
-	public Veiculo() {
+	public VeiculoDTO() {
 		
 	}
-	
-	
 
-
-	public Veiculo(Long id, Integer ano, String placa, String renavan, String patrimonio, String chassi, String versao,
-			Integer capacidadeTanque, Combustivel tipoCombustivel, Tipo tipo) {
+	public VeiculoDTO(Long id, Integer ano, String placa, String renavan, String patrimonio, String chassi,
+			String versao, Integer capacidadeTanque, Combustivel tipoCombustivel, Tipo tipo) {
 		this.id = id;
 		this.ano = ano;
 		this.placa = placa;
@@ -60,9 +37,19 @@ public class Veiculo implements Serializable{
 		this.tipoCombustivel = tipoCombustivel;
 		this.tipo = tipo;
 	}
-
-
-
+	
+	public VeiculoDTO(Veiculo entity) {
+		this.id = entity.getId();
+		this.ano = entity.getAno();
+		this.placa = entity.getPlaca();
+		this.renavan = entity.getRenavan();
+		this.patrimonio = entity.getPatrimonio();
+		this.chassi = entity.getChassi();
+		this.versao = entity.getVersao();
+		this.capacidadeTanque = entity.getCapacidadeTanque();
+		this.tipoCombustivel = entity.getTipoCombustivel();
+		this.tipo = entity.getTipo();
+	}
 
 	public Long getId() {
 		return id;
@@ -136,9 +123,6 @@ public class Veiculo implements Serializable{
 		this.tipoCombustivel = tipoCombustivel;
 	}
 
-
-
-
 	public Tipo getTipo() {
 		return tipo;
 	}
@@ -146,30 +130,4 @@ public class Veiculo implements Serializable{
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Veiculo other = (Veiculo) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-		
 }
