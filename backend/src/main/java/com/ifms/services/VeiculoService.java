@@ -1,6 +1,7 @@
 package com.ifms.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,13 @@ public class VeiculoService {
 		List<Veiculo> list = repository.findAll();
 		return list.stream().map(veiculo -> new VeiculoDTO(veiculo))
 							.collect(Collectors.toList());
+	}
+
+	@Transactional(readOnly = true)	
+	public VeiculoDTO findById(Long id) {
+		Optional<Veiculo> obj =  repository.findById(id);
+		Veiculo veiculo = obj.get();
+		return new VeiculoDTO(veiculo);
 	}
 	
 	
