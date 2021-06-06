@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ifms.dto.VeiculoDTO;
 import com.ifms.entities.Veiculo;
 import com.ifms.repositories.VeiculoRepository;
+import com.ifms.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class VeiculoService {
@@ -28,7 +29,8 @@ public class VeiculoService {
 	@Transactional(readOnly = true)	
 	public VeiculoDTO findById(Long id) {
 		Optional<Veiculo> obj =  repository.findById(id);
-		Veiculo veiculo = obj.get();
+		Veiculo veiculo = obj.orElseThrow(() -> new ResourceNotFoundException(
+				"O veículo solicitado não foi localizado"));
 		return new VeiculoDTO(veiculo);
 	}
 	
