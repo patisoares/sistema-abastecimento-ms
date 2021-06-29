@@ -1,30 +1,36 @@
 package com.ifms.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.ifms.entities.Cidade;
 import com.ifms.entities.Lotacao;
-import com.ifms.entities.Veiculo;
 
 public class LotacaoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@Size(min = 10, max = 150)
+	@NotBlank(message = "O campo é obrigatório")
 	private String descricao;
+	@NotBlank(message = "O campo é obrigatório")
 	private String endereco;
+	@Email
 	private String email;
 	private String site;
+	@NotBlank(message = "O campo é obrigatório")
 	private String telefone;
 	private Cidade cidade;
-	Set<Veiculo> veiculos = new HashSet<>();
+	
 	
 	public LotacaoDTO() {
 	}
 
 	public LotacaoDTO(Long id, String descricao, String endereco, String email, String site, String telefone,
-			Cidade cidade, Set<Veiculo> veiculos) {
+			Cidade cidade) {
 		this.id = id;
 		this.descricao = descricao;
 		this.endereco = endereco;
@@ -32,7 +38,7 @@ public class LotacaoDTO implements Serializable {
 		this.site = site;
 		this.telefone = telefone;
 		this.cidade = cidade;
-		this.veiculos = veiculos;
+		
 	}
 	
 	public LotacaoDTO(Lotacao entity) {
@@ -43,7 +49,7 @@ public class LotacaoDTO implements Serializable {
 		this.site = entity.getSite();
 		this.telefone = entity.getTelefone();
 		this.cidade = entity.getCidade();
-		this.veiculos = entity.getVeiculos();
+		
 	}
 
 	public Long getId() {
@@ -102,13 +108,5 @@ public class LotacaoDTO implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public Set<Veiculo> getVeiculos() {
-		return veiculos;
-	}
-
-	public void setVeiculos(Set<Veiculo> veiculos) {
-		this.veiculos = veiculos;
-	}
-	
-	
+		
 }

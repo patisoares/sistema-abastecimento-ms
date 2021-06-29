@@ -2,6 +2,8 @@ package com.ifms.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
 import com.ifms.entities.Combustivel;
 import com.ifms.entities.Tipo;
 import com.ifms.entities.Veiculo;
@@ -11,6 +13,7 @@ public class VeiculoDTO implements Serializable{
 	
 	private Long id;
 	private Integer ano;
+	@NotBlank(message = "O campo é obrigatório")
 	private String placa;
 	private String renavan;
 	private String patrimonio;

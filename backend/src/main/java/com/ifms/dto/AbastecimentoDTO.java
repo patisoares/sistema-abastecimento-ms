@@ -3,6 +3,10 @@ package com.ifms.dto;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.ifms.entities.Abastecimento;
 import com.ifms.entities.AutoPosto;
 import com.ifms.entities.Combustivel;
@@ -12,6 +16,7 @@ public class AbastecimentoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotBlank @CPF
 	private String cpfMotorista;
 	private Instant dataDoAbastecimento;
 	private Long quilometragem;
